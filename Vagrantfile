@@ -66,7 +66,7 @@ SCRIPT
           lgw.inline = $scriptGateway
         end
 	
-	lan.vm.network "private_network", ip: "192.168.33.0",
+	lan.vm.network "private_network", ip: "192.168.120.2",
 		virtualbox__intnet: "lan"
   end
 
@@ -84,7 +84,7 @@ SCRIPT
           dgw.inline = $scriptGateway
         end
 
-	dmz.vm.network "private_network", ip: "192.168.111.0",
+	dmz.vm.network "private_network", ip: "192.168.121.2",
                 virtualbox__intnet: "dmz"
   end
 
