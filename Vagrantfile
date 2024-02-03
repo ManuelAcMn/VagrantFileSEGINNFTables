@@ -87,3 +87,5 @@ SCRIPT
 	dmz.vm.network "private_network", ip: "192.168.111.0",
                 virtualbox__intnet: "dmz"
   end
+
+end
