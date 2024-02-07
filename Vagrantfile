@@ -15,6 +15,9 @@ SCRIPT
 $scriptAlways = <<-'SCRIPT'
 sudo ip r del default via 10.0.2.2
 echo 1 > /proc/sys/net/ipv4/ip_forward
+#ADDED FOR CONVENIENCE
+sudo apt update; sudo apt upgrade -y
+sudo apt-get install nftables
 SCRIPT
 
   config.vm.provision "todas", type: "shell" do |s|
