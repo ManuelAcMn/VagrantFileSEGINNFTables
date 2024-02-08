@@ -82,6 +82,7 @@ SCRIPT
 
 		cd /vagrant/
 		bash porNodo
+		bash funcionaLAN
   	SCRIPT
 	lan.vm.provision "lan_all", type: "shell", run: "always" do |lgw|
           lgw.inline = $scriptGateway
@@ -107,6 +108,7 @@ SCRIPT
 
 		cd /vagrant/
 		bash porNodo
+		bash funcionaDMZ
         SCRIPT
         dmz.vm.provision "lan_all", type: "shell", run: "always" do |dgw|
           dgw.inline = $scriptGateway
