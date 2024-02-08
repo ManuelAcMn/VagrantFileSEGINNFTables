@@ -33,8 +33,10 @@ SCRIPT
 	fachada.vm.hostname = "fachada"
 	
 	$scriptFachada = <<-'SCRIPT'
-	echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
-	iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
+		echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+		iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
+		apt-get update
+		apt-get upgrade -y
 	SCRIPT
 	fachada.vm.provision "fachada_once", type: "shell" do |fo|
 	  fo.inline = $scriptFachada
@@ -61,6 +63,9 @@ SCRIPT
        		ip r add default via 192.168.33.1
 		ping -c 2 192.168.33.1
 		ping -c 2 www.google.com
+
+		apt-get update
+		apt-get upgrade -y
   	SCRIPT
 	lan.vm.provision "lan_all", type: "shell", run: "always" do |lgw|
           lgw.inline = $scriptGateway
@@ -79,6 +84,9 @@ SCRIPT
 		ip r add default via 192.168.111.1
 		ping -c 2 192.168.111.1
 		ping -c 2 google.com
+
+		apt-get update
+		apt-get upgrade -y
         SCRIPT
         dmz.vm.provision "lan_all", type: "shell", run: "always" do |dgw|
           dgw.inline = $scriptGateway
