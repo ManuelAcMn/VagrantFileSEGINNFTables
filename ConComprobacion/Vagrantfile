@@ -40,7 +40,7 @@ SCRIPT
 	$scriptupgrade = <<-'SCRIPT'
 		apt-get update
 		apt-get upgrade -y
-		apt-get install nft
+		apt-get install nftables
 	SCRIPT
 
         fachada.vm.provision "upgrade_all", type: "shell", run: "always" do |foo|
@@ -75,7 +75,7 @@ SCRIPT
 
 		apt-get update
 		apt-get upgrade -y
-		apt-get install nft
+		apt-get install nftables
   	SCRIPT
 	lan.vm.provision "lan_all", type: "shell", run: "always" do |lgw|
           lgw.inline = $scriptGateway
@@ -97,7 +97,7 @@ SCRIPT
 
 		apt-get update
 		apt-get upgrade -y
-		apt-get install nft
+		apt-get install nftables
         SCRIPT
         dmz.vm.provision "lan_all", type: "shell", run: "always" do |dgw|
           dgw.inline = $scriptGateway
