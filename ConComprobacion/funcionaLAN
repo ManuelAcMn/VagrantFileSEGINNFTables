@@ -1,0 +1,54 @@
+#!/bin/bash
+rojo="\e[31m"
+verde="\e[32m"
+acabo="\e[0m"
+echo "Vamos a comprobar si el dmz funciona"
+sleep 0.5
+echo "Van los ping a otros equipos lan?"
+sleep 0.2
+ping -c 2 192.168.111.2 > /dev/null
+if [ $? == 0 ]; then
+	echo -e "${verde}Funcionan los ping a otros equipos lan ${acabo}"
+else
+        echo -e "${rojo}No funcionan los ping a otros equipos lan ${acabo}"
+fi
+
+sleep 0.5
+echo "Van los ping al exterior?"
+sleep 0.2
+ping -c 2 google.com > /dev/null
+if [ $? == 0 ]; then
+        echo -e "${verde}Funcionan los ping al exterior ${acabo}"
+else
+        echo -e "${rojo}No funcionan los ping al exterior ${acabo}"
+fi
+
+sleep 0.5
+echo "Vamos a comprobar solicitudes DNS"
+sleep 0.2
+nslookup google.com > /dev/null
+if [ $? == 0 ]; then
+        echo -e "${verde}Funcionan las solicitudes DNS ${acabo}"
+else
+        echo -e "${rojo}No funcionan las solicitudes DNS ${acabo}"
+fi
+
+sleep 0.5
+echo "Vamos a comprobar solicitudes HTTP"
+sleep 0.2
+curl http://google.com > /dev/null
+if [ $? == 0 ]; then
+        echo -e "${verde}Funcionan las solicitudes HTTP ${acabo}"
+else
+        echo -e "${rojo}No funcionan las solicitudes HTTP ${acabo}"
+fi
+
+sleep 0.5
+echo "Vamos a comprobar solicitudes HTTPS"
+sleep 0.2
+curl https://google.com > /dev/null
+if [ $? == 0 ]; then
+        echo -e "${verde}Funcionan las solicitudes HTTPS ${acabo}"
+else
+        echo -e "${rojo}No funcionan las solicitudes HTTPS ${acabo}"
+fi
