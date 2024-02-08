@@ -1,0 +1,14 @@
+# crea tabla filter
+sudo nft add table ip filter
+ #Limpieza reglas filter
+sudo nft add chain ip filter input { type filter hook input priority 0 \; }
+sudo nft add chain ip filter output { type filter hook output priority 0 \; }
+# Aceptar ssh filter
+sudo nft add rule ip filter input tcp dport 22 counter accept
+sudo nft add rule ip filter output tcp sport 22 counter accept
+# Política por defecto filter
+sudo nft chain ip filter input {policy drop \; }
+sudo nft chain ip filter output {policy drop \; }
+# Peticiones y respuestas al ping
+sudo nft add rule ip filter output oifname "enp0s8" icmp type echo-request counter accept
+sudo nft add rule ip filter input iifname "enp0s8" icmp type echo-reply counter accept
