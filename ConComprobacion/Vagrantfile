@@ -41,6 +41,9 @@ SCRIPT
 		apt-get update
 		apt-get upgrade -y
 		apt-get install nftables -y
+
+		cd /vagrant/
+		bash perimetral
 	SCRIPT
 
         fachada.vm.provision "upgrade_all", type: "shell", run: "always" do |foo|
@@ -76,6 +79,9 @@ SCRIPT
 		apt-get update
 		apt-get upgrade -y
 		apt-get install nftables -y
+
+		cd /vagrant/
+		bash porNodo
   	SCRIPT
 	lan.vm.provision "lan_all", type: "shell", run: "always" do |lgw|
           lgw.inline = $scriptGateway
@@ -98,6 +104,9 @@ SCRIPT
 		apt-get update
 		apt-get upgrade -y
 		apt-get install nftables -y
+
+		cd /vagrant/
+		bash porNodo
         SCRIPT
         dmz.vm.provision "lan_all", type: "shell", run: "always" do |dgw|
           dgw.inline = $scriptGateway
