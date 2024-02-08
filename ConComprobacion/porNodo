@@ -12,3 +12,9 @@ sudo nft chain ip filter output {policy drop \; }
 # Peticiones y respuestas al ping
 sudo nft add rule ip filter output oifname "enp0s8" icmp type echo-request counter accept
 sudo nft add rule ip filter input iifname "enp0s8" icmp type echo-reply counter accept
+# Consultas y respuestas DNS
+sudo nft add rule ip filter output oifname "enp0s8" udp dport 53 counter accept
+sudo nft add rule ip filter input iifname "enp0s8" udp sport 53 counter accept
+# Tráfico http
+sudo nft add rule ip filter output oifname "enp0s8" tcp dport 80 counter accept
+sudo nft add rule ip filter input iifname "enp0s8" tcp sport 80 counter accept
