@@ -35,9 +35,18 @@ SCRIPT
 	$scriptFachada = <<-'SCRIPT'
 		echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 		iptables -t nat -A POSTROUTING -o enp0s8 -j MASQUERADE
+	SCRIPT
+
+	$scriptupgrade = <<-'SCRIPT'
 		apt-get update
 		apt-get upgrade -y
+		apt-get install nft
 	SCRIPT
+
+        fachada.vm.provision "upgrade_all", type: "shell", run: "always" do |foo|
+          foo.inline = $scriptupgrade
+        end
+
 	fachada.vm.provision "fachada_once", type: "shell" do |fo|
 	  fo.inline = $scriptFachada
 	end
@@ -66,6 +75,7 @@ SCRIPT
 
 		apt-get update
 		apt-get upgrade -y
+		apt-get install nft
   	SCRIPT
 	lan.vm.provision "lan_all", type: "shell", run: "always" do |lgw|
           lgw.inline = $scriptGateway
@@ -87,6 +97,7 @@ SCRIPT
 
 		apt-get update
 		apt-get upgrade -y
+		apt-get install nft
         SCRIPT
         dmz.vm.provision "lan_all", type: "shell", run: "always" do |dgw|
           dgw.inline = $scriptGateway
