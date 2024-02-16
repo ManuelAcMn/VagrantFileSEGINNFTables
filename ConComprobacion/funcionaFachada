@@ -1,0 +1,19 @@
+rojo="\e[31m"
+verde="\e[32m"
+fin="\e[0m"
+echo -e "Comprobando Ping a Google desde fachada."
+ping -c1 8.8.8.8
+if [ $? == 0 ]
+  then
+    echo -e "${verde}Ping a Google desde fachada funcionando correctamente.${fin}"
+  else
+    echo -e "${rojo}Ha ocurrido un error con el ping a Google.${fin}"
+fi
+echo -e "Comprobando consultas DNS desde FACHADA."
+nslookup google.com
+if [ $? == 0 ]
+  then
+    echo -e "${verde}Consultas DNS desde FACHADA funcionando correctamente.${fin}"
+  else
+    echo -e "${rojo}Ha ocurrido un error con las consultas a DNS desde FACHADA.${fin}"
+fi
