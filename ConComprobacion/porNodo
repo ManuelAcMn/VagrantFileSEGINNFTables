@@ -1,10 +1,14 @@
 sudo nft add table inet filter
+
 sudo nft add chain inet filter input { type filter hook input priority 0 \; }
 sudo nft add chain inet filter output { type filter hook output priority 0 \; }
+
 sudo nft add rule inet filter input tcp dport 22 counter accept
 sudo nft add rule inet filter output tcp sport 22 counter accept
+
 sudo nft chain inet filter input {policy drop \; }
 sudo nft chain inet filter output {policy drop \; }
+
 sudo nft add rule inet filter output oifname "enp0s8" icmp type echo-request counter accept
 sudo nft add rule inet filter input iifname "enp0s8" icmp type echo-reply counter accept
 sudo nft add rule inet filter output oifname "enp0s8" udp dport 53 counter accept
