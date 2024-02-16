@@ -42,5 +42,6 @@ nft add rule inet filter forward iifname "enp0s10" oifname "enp0s9" ip saddr 192
 nft add rule inet filter forward oifname "enp0s10" iifname "enp0s9" ip daddr 192.168.111.2 ip saddr 192.168.33.2 tcp sport 3306 accept
 
 # Pol\u00edtica de drop al final
-nft add rule inet filter input drop
-nft add rule inet filter output drop
+sudo nft chain inet filter input {policy drop \; }
+sudo nft chain inet filter output {policy drop \; }
+sudo nft chain inet filter forward {policy drop \; }
